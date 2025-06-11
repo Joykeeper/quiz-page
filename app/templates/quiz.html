@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Quiz</title>
+    <style>
+        body {
+            position: relative;
+            min-height: 100vh;
+        }
+
+        footer {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <h1>Quiz</h1>
+    <form method="POST">
+        <h2>Question 1: What is your name?</h2>
+        <input type="text" name="username" required>
+
+        {% for q in questions %}
+            <h2>{{ loop.index + 1 }}: {{ q.question_text }}</h2>
+            {% if q.question_type == 'choice' %}
+                {% for choice in q.choices %}
+                    <input type="radio" name="question{{ q.id }}" value="{{ choice.choice_text }}"> {{ choice.choice_text }}<br>
+                {% endfor %}
+            {% elif q.question_type == 'open' %}
+                <textarea name="question{{ q.id }}" rows="4" cols="50"></textarea>
+            {% endif %}
+        {% endfor %}
+
+        <br>
+        <input type="submit" value="Submit Answers">
+
+        <div style="position: absolute; top: 10px; right: 10px;">
+            {% if user %}
+                <p>Best Score: {{ user.best_score }}%</p>
+            {% endif %}
+        </div>
+    </form>
+
+    <footer>
+        Created by: Your Name Here
+    </footer>
+</body>
+</html>
