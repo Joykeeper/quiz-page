@@ -30,7 +30,7 @@ def quiz():
         if percent_score > user.best_score:
             user.best_score = percent_score
             db.session.commit()
-        return render_template("quiz.html", questions=QuizQuestion.query.all(), user=user)
+        return render_template("quiz.html", questions=QuizQuestion.query.all(), user=user, score=percent_score)
 
     return render_template("quiz.html", questions=QuizQuestion.query.all(), user=None)
 

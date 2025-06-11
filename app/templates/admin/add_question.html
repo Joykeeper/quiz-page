@@ -29,10 +29,14 @@
         function toggleChoices() {
             const qType = document.getElementById('question_type').value;
             const choicesSection = document.getElementById('choices-section');
+            const choiceInputs = document.querySelectorAll('.choice-input');
+
             if (qType === 'choice') {
-                choicesSection.style.display = 'block';
+            choicesSection.style.display = 'block';
+            choiceInputs.forEach(input => input.setAttribute('required', 'required'));
             } else {
-                choicesSection.style.display = 'none';
+            choicesSection.style.display = 'none';
+            choiceInputs.forEach(input => input.removeAttribute('required'));
             }
         }
 
@@ -43,6 +47,8 @@
             input.name = 'choices';
             input.className = 'choice-input';
             input.placeholder = 'Enter choice text';
+            const qType = document.getElementById('question_type').value;
+            if (qType === 'choice') input.required = true;
             container.appendChild(input);
         }
 
@@ -72,7 +78,7 @@
         <input type="text" id="correct_answer" name="correct_answer" required><br>
 
         <div id="choices-section" style="display:none;">
-            <label>Choices (for choice questions only):</label><br>
+            <label>Choices:</label><br>
             <div id="choices-container">
                 <input type="text" name="choices" class="choice-input" placeholder="Enter choice text" required>
                 <input type="text" name="choices" class="choice-input" placeholder="Enter choice text" required>

@@ -20,7 +20,7 @@
 <body>
     <h1>Quiz</h1>
     <form method="POST">
-        <h2>Question 1: What is your name?</h2>
+        <h2>1: Jak się nazywasz?</h2>
         <input type="text" name="username" required>
 
         {% for q in questions %}
@@ -45,7 +45,13 @@
     </form>
 
     <footer>
-        Created by: Your Name Here
+        Created by: Vladyslav Dovzhenko
     </footer>
+
+    {% if score is defined %}
+    <script>
+        alert("Your score is: {{ score }}%");
+    </script>
+    {% endif %}
 </body>
 </html>
